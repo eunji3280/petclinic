@@ -61,4 +61,15 @@ public interface OwnerRepository extends Repository<Owner, Integer> {
 	 */
 	void save(Owner owner);
 
+	//////과제 : FirstName 정확히 일치하는게 아니라 해당 키워드가 들어있는 걸 찾아볼까?
+	@Query("SELECT DISTINCT owner FROM Owner owner left join fetch owner.pets WHERE owner.firstName LIKE :firstName%")
+	@Transactional(readOnly = true)
+	Collection<Owner> findByFirstName(@Param("firstName") String lastName);
+
+	//query도 모르겠음;;
+	@Query("SELECT DISTINCT owner FROM Owner " +
+		   " owner left join fetch owner.pets " +
+		   " WHERE owner.firstName LIKE %:firstName%")
+	@Transactional(readOnly = true)
+	Collection<Owner> findByFirstNameLike(@Param("firstName") String firstName);
 }

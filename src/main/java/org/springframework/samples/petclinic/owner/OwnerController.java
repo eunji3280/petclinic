@@ -62,8 +62,10 @@ class OwnerController {
 		return VIEWS_OWNER_CREATE_OR_UPDATE_FORM;
 	}
 
+
 	@PostMapping("/owners/new")
 	public String processCreationForm(@Valid Owner owner, BindingResult result) {
+		//BindingResult?? @Valid 어노테이션?
 		if (result.hasErrors()) {
 			return VIEWS_OWNER_CREATE_OR_UPDATE_FORM;
 		}
@@ -83,12 +85,18 @@ class OwnerController {
 	public String processFindForm(Owner owner, BindingResult result, Map<String, Object> model) {
 
 		// allow parameterless GET request for /owners to return all records
-		if (owner.getLastName() == null) {
-			owner.setLastName(""); // empty string signifies broadest possible search
+//		if (owner.getLastName() == null) {
+//			owner.setLastName(""); // empty string signifies broadest possible search
+//		}
+//
+////////////////////////////////////////과제 : LastName이 아니라 FirstName으로 검색해 볼까?
+		if (owner.getFirstName() == null) {
+			owner.setFirstName("");
 		}
-
 		// find owners by last name
-		Collection<Owner> results = this.owners.findByLastName(owner.getLastName());
+//		Collection<Owner> results = this.owners.findByLastName(owner.getLastName());
+////////////////////////////////////////과제 : 정확히 일치하는게 아니라 해당 키워드가 들어있는 걸 찾아볼까?
+		Collection<Owner> results = this.owners.findByFirstNameLike(owner.getFirstName());
 		if (results.isEmpty()) {
 			// no owners found
 			result.rejectValue("lastName", "notFound", "not found");

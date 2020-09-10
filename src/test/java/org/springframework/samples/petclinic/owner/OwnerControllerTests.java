@@ -64,6 +64,8 @@ class OwnerControllerTests {
 
 	private Owner george;
 
+
+	///////////////수정함
 	@BeforeEach
 	void setup() {
 		george = new Owner();
@@ -73,6 +75,7 @@ class OwnerControllerTests {
 		george.setAddress("110 W. Liberty St.");
 		george.setCity("Madison");
 		george.setTelephone("6085551023");
+//		george.setAge(16);
 		Pet max = new Pet();
 		PetType dog = new PetType();
 		dog.setName("dog");
@@ -175,6 +178,7 @@ class OwnerControllerTests {
 				.andExpect(model().attribute("owner", hasProperty("address", is("110 W. Liberty St."))))
 				.andExpect(model().attribute("owner", hasProperty("city", is("Madison"))))
 				.andExpect(model().attribute("owner", hasProperty("telephone", is("6085551023"))))
+	//			.andExpect(model().attribute("owner", hasProperty("age", is(38))))
 				.andExpect(model().attribute("owner", hasProperty("pets", not(empty()))))
 				.andExpect(model().attribute("owner", hasProperty("pets", new BaseMatcher<List<Pet>>() {
 

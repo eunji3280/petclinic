@@ -15,6 +15,10 @@
         <td><b th:text="*{firstName + ' ' + lastName}"></b></td>
       </tr>
       <tr>
+        <th>Age</th>
+        <td th:text="*{age}"></td>
+      </tr>
+      <tr>
         <th>Address</th>
         <td th:text="*{address}"></td>
       </tr>
@@ -26,6 +30,7 @@
         <th>Telephone</th>
         <td th:text="*{telephone}"></td>
       </tr>
+
     </table>
   
     <a th:href="@{{id}/edit(id=${owner.id})}" class="btn btn-default">Edit
